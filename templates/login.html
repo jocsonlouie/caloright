@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto my-5 p-3" style="max-width: 35rem;">
+    <div class="login">
+        <div class="login-screen p-4">
+            <div class="app-title my-3">
+                <h1 class="text-4xl lg:text-5xl text-center text-green mb-5">User Log In</h1>
+            </div>
+
+            <form method="POST" action="" class="login-form my-3">
+                {% csrf_token %}
+                <div class="control-group my-2">
+                    <input type="text" name="username" placeholder="Username..." class="form-control mt-3 block w-full p-3 bg-transparent border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+                    focus:outline-none
+                    focus:border-green-300 focus:ring-1 focus:ring-green-500">
+
+                </div>
+
+                <div class="control-group">
+                    <input type="password" name="password" placeholder="Password..." class="form-control my-3 block w-full p-3 bg-transparent border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+                    focus:outline-none
+                    focus:border-green-300 focus:ring-1 focus:ring-green-500">
+                </div>
+
+
+
+                <input
+                    class="p-2 bg-green-300 rounded text-black uppercase text-sm block w-full mx-auto hover:bg-green-500 font-bold"
+                    type="submit" value="Login">
+
+
+
+            </form>
+            {% for message in messages %}
+            <p id="messages" class="italic">{{message}}</p>
+            {% endfor %}
+
+            <div class="pt-8">
+                <div class="d-flex justify-content-center links pt-5 text-center">
+                    Don't have an account? <a href="/register" class="ml-2  hover:underline underline-offset-4">Sign
+                        Up</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

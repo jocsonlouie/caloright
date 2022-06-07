@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="contain mb-20">
+    <h1 class="text-4xl lg:text-5xl text-green text-center mt-16 mb-12">Developers</h1>
+
+    <div class="flex flex-col md:flex-row flex-wrap gap-4 justify-center items-center">
+        <div class="w-64 flex flex-col gap-2 justify-center items-center border border-white/10 p-4">
+            <img src="{% static 'media/luwi.jpeg' %}" alt="CaloRight Logo"
+                class="w-40 bg-white rounded-full border border-white/10">
+            <h1 class="uppercase font-bold text-center ">Louie Jocson</h1>
+        </div>
+
+        <div class="w-64 flex flex-col gap-2 justify-center items-center border border-white/10 p-4">
+            <img src="{% static 'media/tin.png' %}" alt="CaloRight Logo"
+                class="w-40 rounded-full border border-white/10">
+            <h1 class="uppercase font-bold text-center ">Christine Faith Timpug</h1>
+        </div>
+
+        <div class="w-64 flex flex-col gap-2 justify-center items-center border border-white/10 p-4">
+            <img src="https://tip.instructure.com/files/5112820/download?download_frd=1&verifier=ihOhMXts4yqYF2RahDLQ42WvHTDvNpO9Eq8BHMOh"
+                alt="CaloRight Logo" class="w-40 rounded-full border border-white/10">
+            <h1 class="uppercase font-bold text-center ">Cassandra Brucelo</h1>
+        </div>
+
+        <div class="w-64 flex flex-col gap-2 justify-center items-center border border-white/10 p-4">
+            <img src="{% static 'media/redd.png' %}" alt="CaloRight Logo"
+                class="w-40 rounded-full border border-white/10">
+            <h1 class="uppercase font-bold text-center ">Janus Redd Regal</h1>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

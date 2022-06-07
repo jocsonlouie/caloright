@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+<section>
+    <div class="contain flex flex-col text-center lg:flex-row gap-4 p-5 my-5">
+        <div
+            class="w-full text-center flex flex-col gap-2 lg:text-left lg:items-start items-center text-green justify-center p-5">
+            <h1 id="username" class="text-6xl">Hi, {{ request.user }} !</h1>
+            <h2 class="text-3x1 italic hover:underline"><a href="{% url 'profile' %}">View Profile</a></h2>
+            <h2 class="text-3x1 italic hover:underline"><a href="{% url 'logout' %}">Logout</a></h2>
+        </div>
+
+        <div class="w-full text-center flex flex-col gap-2 lg:text-right lg:items-end items-center justify-center p-5">
+            <img src="{% static 'media/tracker-logo.svg' %}" class="" alt="Tracker Logo" style="max-width: 10rem;">
+            <h1 class="text-5xl text-green">Calorie Tracker</h1>
+            <h1 style="color: #508278;">Use the calorie tracker to track the calories of what you eat everyday.
+                This will also help you to know the nutrients you are absorbing.</h1>
+
+        </div>
+    </div>
+    <div class="contain border-t border-white/10 mb-10"></div>
+    <div class="contain flex flex-col text-center lg:flex-row gap-2 mx-auto">
+        <div class="w-full  text-center flex flex-col gap-2 text-center items-center text-green justify-center p-5">
+
+            <div class="box-content rounded-full flex justify-center text-center align-center flex-col p-7 text-white mb-4"
+                style="background: #508278;">
+                <p class="lg:text-4xl text-2xl font-bold">Total Calories Consumed Today</p>
+            </div>
+            <div class="box-content border-2 border-green-300 flex justify-center text-center align-center flex-col w-96 p-5 h-full"
+                style="max-width: 80vw;">
+                <p class="text-5xl lg:text-6xl">{{total_calorie}} cal.</p>
+            </div>
+
+        </div>
+
+        <div class="w-full text-center flex flex-col gap-2 items-center justify-center text-green">
+            <div class="box-content border-2 border-green-300 flex justify-center text-center align-center flex-col w-96 p-5 h-full"
+                style="max-width: 80vw;">
+                <h1 class="text-2xl lg:text-4xl font-bold mb-3">Calorie Goal for Today</h1>
+                <p class="lg:text-6xl text-4xl">{{ calorie_goal }} cal.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="contain flex text-center mx-auto">
+        <div
+            class="box-content w-full  h-full border-2 border-green-300 flex justify-center text-center align-center flex-col py-4 lg:mx-14 mx-8 p-5 mt-7">
+            <p class="lg:text-3xl text-2xl italic">
+                {% if calorie_goal_status > 0 %}
+                You need <span class="text-green">{{ calorie_goal_status }} </span> calories more to reach your
+                goal
+                {% elif calorie_goal == 0 %}
+                <a href="{% url 'profile' %}"> Enter your calorie goal for the day </a>
+                {% else %}
+                You surpassed your goal by {{ over_calorie }} calories
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="contain flex flex-col my-20 justify-center">
+
+        <h1 class="lg:text-5xl text-3xl mb-7 font-bold  text-center" style="color: #508278;">All Foods Consumed Today
+        </h1>
+
+        <div class="w-full flex flex-row lg:justify-end lg:space-x-4 space-x-2 lg:pr-10 justify-center">
+            <h1><a href="\add_food" class="lg:text-2xl mb-7 font-bold hover:underline italic"> Add Food</a>
+            </h1>
+            <h1><a href="\select_food" class="lg:text-2xl mb-7 font-bold hover:underline italic"> Select Food</a></h1>
+        </div>
+
+        <table class="table-auto border-collapse border border-green-300 mx-10 mt-5">
+            <thead class="bg-green text-black text-2xl lg:text-3xl">
+                <tr>
+                    <th class="border border-green-300">Food</th>
+                    <th class="border border-green-300">Calories</th>
+                    <th class="border border-green-300">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_selected_today %}
+                <tr class="text-center">
+                    <td class="border border-green-300"> {{food.food.name}}</td>
+                    <td class="border border-green-300"> {{food.calorie_amount}}</td>
+                    <td class="border border-green-300"> {{food.amount}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+
+
+
+{% endblock content %}
