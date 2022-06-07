@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="contain wrapper mb-20">
+  <div class="hero">
+    <img src="{% static 'media/target.svg' %}" width="80">
+    <h1 class="text-5xl lg:text-6xl" style="max-width: 600px; text-align: center;">Your all-in-one calorie tracking app.
+    </h1>
+    <p class="text-white">Be healthy in the right way</p>
+    <a href="/tracker" class="p-4 rounded text-black uppercase text-sm bg-green z-10">Open Dashboard</a>
+  </div>
+  <img src="{% static 'media/plant-left.svg' %}" class="w-1/2 absolute left-0 bottom-0 lg:w-1/3">
+  <img src="{% static 'media/plant-right.svg' %}" class="w-1/2	absolute right-0 bottom-0 lg:w-1/3">
+</div>
+
+<div class="contain flex flex-col justify-between items-center gap-4 my-20">
+  <h1 class="text-4xl lg:text-5xl text-green">How do we help?</h1>
+  <h3 class="uppercase font-bold">Healthy Lifestyle ✨</h3>
+  <p class="text-center lg:max-w-3xl">Counting calories can help you lose weight by making you more conscious of what
+    you consume on
+    a daily basis. This might help you uncover eating patterns that need to be changed and keep you on pace to meet your
+    objectives.</p>
+  <div class="w-full flex flex-row  gap-4 mt-4 ">
+
+    <div class="w-full p-4 flex flex-col md:flex-row gap-4 justify-center items-center border border-white/10">
+
+      <div class="w-24 h-24 border border-white/10 rounded-full flex justify-center items-center">
+        <i class="fa-solid fa-calendar-check text-3xl"></i>
+      </div>
+
+      <div class="flex flex-col gap-2 text-center md:text-left">
+        <h3>Calorie Tracker</h3>
+        <p class="text-sm">Inputting & Tracking Calories Intake</p>
+      </div>
+    </div>
+
+    <div class="w-full p-4 flex flex-col md:flex-row gap-4 justify-center items-center border border-white/10">
+
+      <div class="w-24 h-24 border border-white/10 rounded-full flex justify-center items-center">
+        <i class="fa-solid fa-drumstick-bite text-3xl"></i>
+      </div>
+
+      <div class="flex flex-col gap-2 text-center md:text-left">
+        <h3>Nutrient Summary</h3>
+        <p class="text-sm">Displaying of Nutrients Breakdown</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="w-full flex flex-row  gap-4 ">
+
+    <div class="w-full p-4 flex flex-col md:flex-row gap-4 justify-center items-center border border-white/10">
+
+      <div class="w-24 h-24 border border-white/10 rounded-full flex justify-center items-center">
+        <i class="fa-brands fa-nutritionix text-3xl"></i>
+      </div>
+
+      <div class="flex flex-col gap-2 text-center md:text-left">
+        <h3>Calorie Calculator</h3>
+        <p class="text-sm">Calculating & Setting Needed Calories</p>
+      </div>
+    </div>
+
+    <div class="w-full p-4 flex flex-col md:flex-row gap-4 justify-center items-center border border-white/10">
+
+      <div class="w-24 h-24 border border-white/10 rounded-full flex justify-center items-center">
+        <i class="fa-solid fa-hand-holding-heart text-3xl"></i>
+      </div>
+
+      <div class="flex flex-col gap-2 text-center md:text-left">
+        <h3>Healthy Tips & Info</h3>
+        <p class="text-sm">Presenting tips and other information </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="contain my-20 flex flex-col justify-center items-center gap-4">
+  <h1 class="text-4xl lg:text-5xl text-green">Did you know?</h1>
+  <div class="w-full flex flex-col text-center lg:flex-row gap-4 mt-6">
+    <div class="w-full flex justify-center items-center lg:items-start mt-4">
+      <img src="{% static 'media/calories.jpg' %}" class="w-full rounded lg:sticky lg:top-24">
+    </div>
+
+    <div class="w-full text-center flex flex-col gap-2 lg:text-left">
+      <h3 class="uppercase font-bold text-2xl">HOW ARE CALORIES DIVIDED?</h3>
+      <h3 class="font-bold text-xl">Carbs</h3>
+      <p class="text-md">Low carbohydrate diets can be very effective for weight loss, according to research. Reducing
+        carbs tends to reduce your appetite and cause automatic weight loss, or weight loss.</p>
+
+      <h3 class="font-bold text-xl">Protein</h3>
+      <p class="text-md">Protein is one of a complex group of molecules that do all kinds of jobs in your body. They
+        make up your hair, nails, bones, and muscles. Protein gives tissues and organs their shape and also helps them
+        work the way they should. </p>
+
+      <h3 class="font-bold text-xl">Fats</h3>
+      <p class="text-md">Fats in food come in several forms, including saturated, mono-unsaturated, and polyunsaturated.
+        Too much fat or too much of the wrong type of fat can be unhealthy. Some examples of foods that contain fats are
+        butter, oil, nuts, meat, fish, and some dairy products. </p>
+
+      <h3 class="font-bold text-xl">What does Carbs do to your body?</h3>
+      <p class="text-md">Carbs are responsible of giving our body with glucose and this glucose are the cause of our
+        energy that our body needs, in order for our body to do physical activities!</p>
+
+      <h3 class="font-bold text-xl">What does Protein do to your body?</h3>
+      <p class="text-md">Protein’s Function is to help your body repair cells and then make new ones, Protein is also
+        responsible for children’s growth and development</p>
+
+      <h3 class="font-bold text-xl">What does Fats do to your body?</h3>
+      <p class="text-md">There are 2 types of fats: Saturated and Unsaturated. The Saturated Fat is the “Bad Fat” and
+        the Unsaturated Fat is the “Good Fat”. The Unsaturated Fat’s purpose is to help you lower cholesterol and reduce
+        your risk of heart disease</p>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col text-center lg:flex-row gap-4 mt-6">
+    <div class="w-full flex justify-between items-center lg:items-start mt-4">
+      <img src="{% static 'media/easier.jpg' %}" class="w-full rounded lg:sticky lg:top-24">
+    </div>
+
+    <div class="w-full text-center flex flex-col gap-2 lg:text-left">
+      <h3 class="uppercase font-bold text-2xl">How to make calorie counting much easier?</h3>
+      <h3 class="font-bold text-xl">First</h3>
+      <p class="text-md">Start with how you actually eat!</p>
+
+      <h3 class="font-bold text-xl">Second</h3>
+      <p class="text-md">Use CaloRight </p>
+
+      <h3 class="font-bold text-xl">Third</h3>
+      <p class="text-md"> Identify your Patterns </p>
+
+      <h3 class="font-bold text-xl">Fourth</h3>
+      <p class="text-md">Establish Baseline, Then adjust</p>
+
+      <h3 class="font-bold text-xl">Fifth</h3>
+      <p class="text-md">Build around a Few Core meals</p>
+
+      <h3 class="font-bold text-xl">Sixth</h3>
+      <p class="text-md">Get Familiar with pre-portioned Foods</p>
+
+      <h3 class="font-bold text-xl">Seventh</h3>
+      <p class="text-md">Have your staple meals pre-loaded in our app</p>
+
+      <h3 class="font-bold text-xl">Eighth</h3>
+      <p class="text-md">Don’t just focus on Calories</p>
+
+      <h3 class="font-bold text-xl">Ninth</h3>
+      <p class="text-md">Finish the Job and Move on!</p>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col text-center lg:flex-row gap-4 mt-6">
+    <div class="w-full flex justify-between items-center lg:items-start mt-4">
+      <img src="{% static 'media/other.jpg' %}" class="w-full rounded lg:sticky lg:top-24">
+    </div>
+
+    <div class="w-full text-center flex flex-col gap-2 lg:text-left">
+      <h3 class="uppercase font-bold text-2xl">Other Information</h3>
+      <h3 class="font-bold text-xl">Calories and kilocalories</h3>
+      <p class="text-md">The term calorie is commonly used as shorthand for kilocalorie. You will find this written as
+        kcal on food packets. Kilojoules (kJ) are the equivalent of kilocalories within the International System of
+        Units.</p>
+
+      <h3 class="font-bold text-xl">What should my daily intake of calories be?</h3>
+      <p class="text-md"> Generally, the recommended daily calorie intake is 2,000 calories a day for women and 2,500
+        for men.</p>
+
+      <h3 class="font-bold text-xl">Why do calories matter?</h3>
+      <p class="text-md"> Caloric energy is vital in supporting life and health.The body converts calories from food,
+        for example, into energy. It uses this energy immediately or stores it for later use, depending on its current
+        needs. </p>
+
+      <h3 class="font-bold text-xl">Risk of taking too much Calories</h3>
+      <p class="text-md">Once you consume more calories than the calories you burn you will be at risk of overweight or
+        getting obese, you might also be at risk of getting cancer or such disease and other chronic health diseases.
+      </p>
+
+      <h3 class="font-bold text-xl">Calories keeps you alive! </h3>
+      <p class="text-md">Calories are unit of energy, so without them you will barely have energy to move all day long
+        and consuming below the calorie you needed, will not assist you much on your daily acts.</p>
+
+      <h3 class="font-bold text-xl">Quality and Quantity</h3>
+      <p class="text-md">Both Quality and Quantity matters equally, eating a snack that contains high calories does not
+        mean its good, you must also take a look on how much nutrients there are and what are missing once, so its
+        better to eat balance.</p>
+
+      <h3 class="font-bold text-xl">Proten Calories helps weight loss</h3>
+      <p class="text-md">Protein provides; Increasing our muscle mass and helps our metabolic rates. If we are getting
+        to 25 to 33% of calories from protein this is where can see big changes in our body!</p>
+
+      <h3 class="font-bold text-xl">Counting calories may not be effective to everyone</h3>
+      <p class="text-md">While we do keep in mind how much calories we should intake per day, there are some people who
+        cannot do this due to the reason they might plan calorie intake and will lead to unhealthy plans. So only count
+        if it helps and if its not you can stop counting.</p>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- <h1 id="username" class="text-center mt-4 headline">Hi {{ request.user }}<sub><a
+      href="{% url 'logout' %}">(Logout)</a></sub></h1>
+
+
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 item ">
+      <div class="card item-card card-block">
+        <h5 class="card-title mt-3 mb-3 text-center">Total Calories Consumed Today</h5>
+        <p class="card-text text-center">{{ total_calorie }}</p>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-12 item">
+      <div class="card item-card card-block mt-sm-2 mt-lg-0">
+        <h5 class="card-title  mt-3 mb-3 text-center">Calorie Goal For Today</h5>
+        <p class="card-text text-center">{{ calorie_goal }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="card text-white text-center mt-4" style="border-radius: 20px;">
+
+  <div class="card-body">
+
+    <p class="card-text text-center pt-3" style="font-size:22px">
+      {% if calorie_goal_status > 0 %}
+      You need {{ calorie_goal_status }} calories more to reach your goal
+      {% elif calorie_goal == 0 %}
+      <a href="{% url 'profile' %}"> Enter your calorie goal for the day </a>
+      {% else %}
+      You surpassed your goal by {{ over_calorie }} calories
+      {% endif %}
+    </p>
+
+  </div>
+
+</div>
+
+<h1 class="headline text-center mt-auto mb-auto">All Food Consumed Today </h1>
+<div class="container table-responsive py-5">
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th scope="col">Food</th>
+        <th scope="col">Calorie</th>
+        <th scope="col">Count</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+      {% for food in food_selected_today %}
+      <tr class="text-center">
+        <td> {{ food.food.name }}</td>
+        <td> {{ food.calorie_amount }}</td>
+        <td> {{ food.amount }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div> -->
+
+
+{% endblock content %}

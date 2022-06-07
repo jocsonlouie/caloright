@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section class=" mb-20">
+    <h1 class="text-4xl lg:text-5xl text-green text-center mt-16 mb-12">About CaloRight</h1>
+
+    <div class="contain flex flex-col md:flex-row gap-4 justify-center items-center">
+        <img src="{% static 'media/favicon.svg' %}" alt="CaloRight Logo" class=" w-1/2 md:w-full">
+        <div class="max-w-3xl">
+            <p>CaloRight is a web application used to track a user’s calorie intake every day. To meet the application
+                objectives, useful information was added. It includes the daily consumption and the breakdown of the
+                total
+                nutrient. It tackles what food was taken, how many carbohydrates were consumed, proteins, fats, and the
+                most
+                important information, the calories consumed. To track the calories, the amount will be calculated using
+                the
+                basic operations.
+            </p>
+            <br>
+            <p>
+                In addition, a TDEE calculator will be included to set a user’s goal. It is a calculator to determine
+                the
+                number of calories that a person should consume to reach their goals like dieting, gaining weight, or
+                being
+                healthy. It also contains the know-how and other information about the calorie tracker, health tips, and
+                such. With the provided features, users will be fit and healthy in the right way.</p>
+        </div>
+    </div>
+
+    <div
+        class="flex flex-col flex-wrap justify-between items-center md:flex-row gap-4 p-4 my-20 border-t border-b border-white/10">
+        <img src="{% static 'media/django.png' %}" alt="CaloRight Logo" class="max-w-xs">
+        <img src="{% static 'media/python.png' %}" alt="CaloRight Logo" class="max-w-xs">
+        <img src="{% static 'media/tailwind.png' %}" alt="CaloRight Logo" class="max-w-xs">
+        <img src="{% static 'media/auth.png' %}" alt="CaloRight Logo" class="max-w-xs">
+    </div>
+</section>
+
+
+{% endblock content %}

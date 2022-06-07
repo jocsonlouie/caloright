@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto my-5 p-3" style="max-width: 35rem;">
+  <div class="login">
+    <div class="login-screen p-4">
+      <div class="app-title my-3">
+        <h1 class="text-4xl lg:text-5xl text-center text-green mb-5">User Register</h1>
+      </div>
+
+      <form method="POST" action="" class="login-form">
+        {% csrf_token %}
+        <div class="form-control my-3 block w-full p-3 bg-transparent border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+                focus:outline-none
+                focus:border-green-300 focus:ring-1 focus:ring-green-500">
+          {{ form.username }}
+
+        </div>
+
+        <div class="control-group">
+          {{ form.email}}
+        </div>
+        <div class="control-group">
+          {{ form.password1 }}
+        </div>
+        <div class="control-group">
+          {{ form.password2 }}
+        </div>
+        <input
+          class="p-2 bg-green-300 rounded text-black uppercase text-sm block w-full mx-auto hover:bg-green-500 font-bold"
+          type="submit" name="Register">
+
+      </form>
+      {{ form.errors }}
+      <div class="d-flex justify-content-center links mt-8 text-center">
+        Already have an account? <a href="{% url 'login' %}" class="ml-4 hover:underline underline-offset-4">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  //Query All input fields
+  var form_fields = document.getElementsByTagName('input')
+  form_fields[1].placeholder = 'Username..';
+  form_fields[2].placeholder = 'Email..';
+  form_fields[3].placeholder = 'Enter password...';
+  form_fields[4].placeholder = 'Re-enter Password...';
+
+
+  for (var field in form_fields) {
+    form_fields[field].className += ' form-control'
+  }
+</script>
+
+{% endblock content %}

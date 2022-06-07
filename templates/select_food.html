@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="contain ">
+    <div class="my-10 max-w-3xl p-12 border-4 border-green-300 rounded mx-auto">
+        <h1 class="text-3xl lg:text-4xl text-center mb-4">Select Food 😋</h1>
+        <form method="POST" action="" class="text-center flex flex-col gap-4 justify-center items-center">
+            {% csrf_token %}
+            <h5 class="w-full md:w-1/2 form-labels text-white text-black text-center">
+                {{ form.as_p }}
+            </h5>
+            <input
+                class="btn login_btn select_btn bg-green border border-4 p-3 my-3 rounded-full hover:underline cursor-pointer text-green"
+                type="submit" value="Select">
+        </form>
+    </div>
+</section>
+
+<section class="contain ">
+    <div class="my-10 max-w-3xl mx-auto">
+        <h1 class="text-3xl lg:text-4xl text-center mb-4">All Food Items 🧺</h1>
+
+        <table class="py-5 table-fixed w-full px-4 md:table-fixed lg:table-responsive sm:table-fixed">
+            <thead class="bg-[#C8FAC8] text-black">
+                <tr class="">
+                    <th scope="col">Food Name</th>
+                    <th scope="col">Calories</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_items %}
+                <tr>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.name}}
+                    </td>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.calorie}}
+                    </td>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.quantity}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- <section>
+    <div class="contain p-5 my-5">
+        <div class="w-full box-content border-2 border-green-300 flex justify-center text-center align-center flex-col p-12 h-full"
+            style="max-width: 80vw;">
+            <p class="text-center text-3xl font-bold">Select Food</p>
+            <form method="POST" action="" class="text-center">
+                {% csrf_token %}
+                <h5 class="form-labels text-white text-black text-center p-5 lg:text-2xl space-y-4">
+                    {{ form.as_p }}
+                </h5>
+                <input
+                    class="btn login_btn bg-green border border-4 p-3 my-3 rounded-full hover:underline cursor-pointer text-green"
+                    type="submit" value="Select">
+            </form>
+        </div>
+    </div>
+</section> -->
+
+
+<!-- </div>
+<div class="contain w-screen items-center md:items-center lg:justify-center ">
+    <div class="flex justify-center md:justify-center lg:justify-center sm:items-center">
+        <h1 class="headline text-[#C8FAC8] text-5xl py-5 md:text-5xl lg:text-5xl font-bold"> All Food Items
+        </h1>
+    </div>
+    <div class="flex justify-center sm:justify-center md:justify-center lg:items-center py-3">
+        <table class="py-5 table-fixed w-full px-4 md:table-fixed lg:table-responsive sm:table-fixed">
+            <thead class="bg-[#C8FAC8] text-black">
+                <tr class="">
+                    <th scope="col">Food Name</th>
+                    <th scope="col">Calories</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_items %}
+                <tr>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.name}}
+                    </td>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.calorie}}
+                    </td>
+                    <td class="text-center border t-2 border-green-200 px-4 py-3 rounded-lg">{{food.quantity}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div> -->
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+	<div class="contain p-5 my-5">
+		<div class="box-content border-2 border-green-300 flex justify-center text-center align-center flex-col p-12 h-full"
+			style="max-width: 80vw;">
+			<p class="text-center text-3xl">Are you sure you want to delete {{ food }} ?</p>
+			<form method="POST" action="{% url 'delete_food' food.id %}" class="text-center text-green">
+				{% csrf_token %}
+				<a href="{% url 'profile' %}" class="hover:underline">Cancel</a>
+				<input type="submit" name="Confirm" class="hover:underline">
+			</form>
+		</div>
+	</div>
+</section>
+
+
+
+
+{% endblock content %}

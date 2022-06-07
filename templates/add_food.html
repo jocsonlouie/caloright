@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section>
+    <div class="contain flex justify-center align-center flex-col text-center w-full my-12">
+        <div class="flex justify-center px-4">
+            <img src="{% static 'media/tracker-logo.svg' %}" class="px-4" alt="Tracker Logo" style="max-width: 10rem;">
+        </div>
+        <h1 class="headline text-[#C8FAC8] text-4xl py-5 font-bold">Adding Food</h1>
+        <h2 class="text-3x1 italic hover:underline text-green"><a href="{% url 'profile' %}">Back to Profile</a>
+    </div>
+
+    <div class="contain px-8 flex justify-center items-center my-7 mx-auto flex-col lg:flex-row space-y-4">
+
+        <div class="border-green-200 max-w-md border-4 rounded-lg p-8 flex flex-col lg:w-full md:max-w-2x1">
+
+            <div class="py-3 md:flex text-sm  ">
+                <form method="POST" action="" class="login_form ">
+                    {% csrf_token %}
+                    <label for="name" class="leading-7 text-[#C8FAC8] text-2xl text-sm">Food
+                        Name
+                    </label>
+
+                    <input type="text" id="name" name="name" placeholder="Enter Food Name" value="{{field}}"
+                        class="w-full bg-transparent rounded border border-gray-300 focus:border-[#C8FAC8] focus:ring-2 focus:ring-[#C8FAC8] text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <label for="quantity" class="leading-7 text-[#C8FAC8] text-2xl"> Quantity
+                    </label>
+                    <input type="number" id="quantity" name="quantity" placeholder="Enter Quantity" value="{{field}}"
+                        class="w-full bg-transparent rounded border border-gray-300 focus:border-[#C8FAC8] focus:ring-2 focus:ring-[#C8FAC8] text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out ">
+                    <label for="calorie" class="leading-7 text-[#C8FAC8] text-2xl">Calorie
+                    </label>
+                    <input type="number" id="calorie" name="calorie" placeholder="Enter Calorie" value="{{field}}"
+                        class="w-full bg-transparent rounded border border-gray-300 focus:border-[#C8FAC8] focus:ring-2 focus:ring-[#C8FAC8] text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    <button type="submit" value="select"
+                        class="w-full bg-green-300 text-black  py-3 rounded-lg font-bold text-2xl">Add
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <form method="get">
+            <div class="px-8 max-width text-center flex flex-col gap-2 lg:text-left ">
+                <div class="border-[#C8FAC8] border-4 rounded-lg px-8 space-y-2 px-8">
+                    <h1 class="leading-7 text-black text-2xl py-4">
+                        {{ myFilter.form }} </h1>
+
+                    <div class="flex justify-center py-0">
+                        <button
+                            class="bg-green-300 my-5 text-black p-3 px-6 rounded-lg font-bold text-2xl">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="contain w-full flex-col">
+        <h1 class="headline text-[#C8FAC8] text-3xl py-5 md:text-2xl lg:text-5xl font-bold text-center"> All Food Items
+        </h1>
+        <table class="table-auto border-collapse border border-green-300 mt-5 w-full">
+            <thead class="bg-green text-black lg:text-3xl">
+                <tr>
+                    <th class="border border-green-300">Food Name</th>
+                    <th class="border border-green-300">Calories</th>
+                    <th class="border border-green-300">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for food in food_items %}
+                <tr class="text-center py-3">
+                    <td class="border border-green-300 py-1">{{ food.name }}</td>
+                    <td class="border border-green-300 py-1">{{ food.calorie }}</td>
+                    <td class="border border-green-300 py-1">{{ food.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+{% endblock content %}
