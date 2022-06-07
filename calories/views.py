@@ -106,7 +106,7 @@ def select_food(request):
         if form.is_valid():
 
             form.save()
-            return redirect('home')
+            return redirect('tracker')
     else:
         form = SelectFoodForm(request.user)
 

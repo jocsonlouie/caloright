@@ -13,12 +13,12 @@
         <h2 class="text-3x1 italic hover:underline text-green"><a href="{% url 'profile' %}">Back to Profile</a>
     </div>
 
-    <div class="contain px-8 flex justify-center items-center my-7 mx-auto flex-col lg:flex-row space-y-4">
+    <div class="w-full contain px-8 flex justify-center items-center my-7 mx-auto flex-col lg:flex-row space-y-4">
 
-        <div class="border-green-200 max-w-md border-4 rounded-lg p-8 flex flex-col lg:w-full md:max-w-2x1">
+        <div class="w-full border-green-200 max-w-md border-4 rounded-lg p-8 flex flex-col lg:w-full md:max-w-2x1">
 
-            <div class="py-3 md:flex text-sm  ">
-                <form method="POST" action="" class="login_form ">
+            <div class="py-3 md:flex text-sm flex flex-col ">
+                <form method="POST" action="" class="login_form flex flex-col gap-4">
                     {% csrf_token %}
                     <label for="name" class="leading-7 text-[#C8FAC8] text-2xl text-sm">Food
                         Name
