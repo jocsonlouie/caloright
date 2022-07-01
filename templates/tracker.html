@@ -60,6 +60,11 @@
         </div>
     </div>
 
+    <div class="contain flex flex-col md:flex-row justify-between items-center gap-4 py-12">
+        <canvas id="totalFoodCounts"></canvas>
+        <canvas id="nutrientSummary"></canvas>
+    </div>
+
     <div class="contain flex flex-col my-20 justify-center">
 
         <h1 class="lg:text-5xl text-3xl mb-7 font-bold  text-center" style="color: #508278;">All Foods Consumed Today
@@ -93,7 +98,139 @@
 
 </section>
 
+<script>
+    const ctxFoodCounts = document.getElementById('totalFoodCounts').getContext('2d');
+    const myChartFoodCounts = new Chart(ctxFoodCounts, {
+        type: 'line',
+        data: {
+            labels: ['Oreo', 'Rice', 'Grapes', 'Chicken'],
+            datasets: [
+                {
+                    label: 'Oreo',
+                    data: [36, 59, 5, 23],
+                    hoverOffset: 4,
+                    borderColor: 'green'
+                },
+                {
+                    label: 'Rice',
+                    data: [76, 28, 15, 57],
+                    hoverOffset: 4,
+                    borderColor: 'blue'
+                },
+                {
+                    label: 'Grapes',
+                    data: [93, 17, 83, 12],
+                    hoverOffset: 4,
+                    borderColor: 'violet'
+                },
+                {
+                    label: 'Chicken',
+                    data: [28, 16, 73, 81],
+                    hoverOffset: 4,
+                    borderColor: 'gold'
+                },
+            ],
 
+        },
+        options: {
+            elements: {
+                arc: {
+                    borderWidth: 0
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        color: 'white'
+                    },
+                },
+                y: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        color: 'white'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctxNutrient = document.getElementById('nutrientSummary').getContext('2d');
+    const myChartNutrient = new Chart(ctxNutrient, {
+        type: 'line',
+        data: {
+            labels: ['Fat', 'Carbs', 'Protein'],
+            datasets: [
+                {
+                    label: 'Fat',
+                    data: [36, 59, 5],
+                    hoverOffset: 4,
+                    backgroundColor: [
+                        'rgba(80, 130, 120, 0.6)',
+                        'rgba(130, 255, 135, 0.6)',
+                        'rgba(200, 250, 200, 0.6)',
+                    ],
+                    fill: true,
+                },
+                {
+                    label: 'Carbs',
+                    data: [76, 28, 15],
+                    hoverOffset: 4,
+                    backgroundColor: [
+                        'rgba(80, 130, 120, 0.6)',
+                        'rgba(130, 255, 135, 0.6)',
+                        'rgba(200, 250, 200, 0.6)',
+                    ],
+
+                    fill: true,
+                },
+                {
+                    label: 'Protein',
+                    data: [93, 17, 83, 12],
+                    hoverOffset: 4,
+                    backgroundColor: [
+                        'rgba(80, 130, 120, 0.6)',
+                        'rgba(130, 255, 135, 0.6)',
+                        'rgba(200, 250, 200, 0.6)',
+                    ],
+                    fill: true,
+                },
+            ],
+
+        },
+        options: {
+            elements: {
+                arc: {
+                    borderWidth: 0
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        color: 'white'
+                    },
+                },
+                y: {
+                    ticks: {
+                        color: 'white',
+                    },
+                    grid: {
+                        color: 'white'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 
 {% endblock content %}

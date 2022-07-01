@@ -16,6 +16,7 @@
   <img src="{% static 'media/plant-right.svg' %}" class="w-1/2	absolute right-0 bottom-0 lg:w-1/3">
 </div>
 
+
 <div class="contain flex flex-col justify-between items-center gap-4 my-20">
   <h1 class="text-4xl lg:text-5xl text-green">How do we help?</h1>
   <h3 class="uppercase font-bold">Healthy Lifestyle ✨</h3>
@@ -78,6 +79,11 @@
     </div>
 
   </div>
+</div>
+
+<div class="contain flex flex-col md:flex-row justify-between items-center gap-4">
+  <canvas id="numberOfUsersChart"></canvas>
+  <canvas id="usersGenderPercentage"></canvas>
 </div>
 
 <div class="contain my-20 flex flex-col justify-center items-center gap-4">
@@ -201,6 +207,81 @@
     </div>
   </div>
 </div>
+
+<script>
+  const ctx = document.getElementById('numberOfUsersChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Guest', 'New User', 'Existing User'],
+      datasets: [{
+        label: 'Number of Users',
+        data: [12, 19, 3],
+        backgroundColor: [
+          '#508278',
+          '#82FF87',
+          '#C8FAC8',
+        ],
+      }]
+    },
+    options: {
+
+      scales: {
+        x: {
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          ticks: {
+            color: 'white',
+          },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const ctxGender = document.getElementById('usersGenderPercentage').getContext('2d');
+  const myChartGender = new Chart(ctxGender, {
+    type: 'doughnut',
+    data: {
+      labels: ['Female', 'Male', 'Rather Not to Say'],
+      datasets: [{
+        label: 'Number of Users',
+        color: 'white',
+        data: [36, 59, 5],
+        backgroundColor: [
+          '#508278',
+          '#82FF87',
+          '#C8FAC8',
+        ],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      elements: {
+        arc: {
+          borderWidth: 0
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          ticks: {
+            color: 'white',
+          },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+</script>
 
 
 <!-- <h1 id="username" class="text-center mt-4 headline">Hi {{ request.user }}<sub><a
