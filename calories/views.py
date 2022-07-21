@@ -45,7 +45,7 @@ def HomePageView(request):
 
     # return render(request, 'home.html', context)
     return render(request, 'home.html')
-# signup page
+# signup page changes
 
 
 def RegisterPage(request):
