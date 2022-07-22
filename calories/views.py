@@ -10,6 +10,10 @@ from datetime import date
 from datetime import datetime
 from .filters import FoodFilter
 
+
+def AnalyticsPageView(request):
+    return render(request, 'analytics.html')
+
 # home page view
 
 
