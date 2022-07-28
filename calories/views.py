@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.http import JsonResponse
+from django.http import HttpResponse
 from .forms import SelectFoodForm, AddFoodForm, CreateUserForm, ProfileForm
 from .models import *
 from datetime import timedelta
@@ -11,14 +14,86 @@ from datetime import datetime
 from .filters import FoodFilter
 
 
+def BasePageView(request):
+    current_user = request.user.is_staff
+    context = {
+        "current_user": current_user
+    }
+    return render(request, 'base.html', context)
+
+
+def allGender(request):
+    if request.method == 'GET':
+        current_gender = request.GET['gender']
+        current_user = request.user
+        u = Gender(gender=current_gender, user=request.user)
+        result = Gender.objects.filter(Q(user__icontains=current_user))
+        if len(result) == 1:
+            print("User Exist ")
+        elif len(result) > 1:
+            print("Many users ")
+        else:
+            u.save()
+            return HttpResponse("Success!")
+    else:
+        return HttpResponse("Request method is not a GET")
+
+
+@login_required(login_url='login')
 def AnalyticsPageView(request):
-    return render(request, 'analytics.html')
+    users = User.objects.all()
+    today = datetime.today().date()
+    now = timezone.now()
+    # new_register = User.objects.filter(date_joined__date=today)
+    new_register = User.objects.filter(
+        date_joined__gte=datetime.now()-timedelta(days=7)).count()
+
+    guess_users = Count.objects.all().count()
+
+    calories = Profile.objects.filter(person_of=request.user).last()
+    all_food_today = PostFood.objects.filter(profile=calories)
+
+    genderOtherCount = Gender.objects.filter(gender='Rather not say').count()
+    genderMaleCount = Gender.objects.filter(gender='Male').count()
+    genderFemaleCount = Gender.objects.filter(gender='Female').count()
+
+    context = {
+        "users": users,
+        "users_count": users.count,
+        "user_new_count": new_register,
+        "guess_users": guess_users,
+        "food_for_today": all_food_today,
+        "genderOtherCount": genderOtherCount,
+        "genderMaleCount": genderMaleCount,
+        "genderFemaleCount": genderFemaleCount
+    }
+    return render(request, 'analytics.html', context)
+
 
 # home page view
 
 
 def HomePageView(request):
+    def get_ip(request):
+        address = request.META.get('HTTP_X_FORWARDED_FOR')
+        if address:
+            ip = address.split(',')[-1].strip()
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
 
+    ip = get_ip(request)
+    u = Count(count=ip)
+    result = Count.objects.filter(Q(count__icontains=ip))
+    if len(result) == 1:
+        print("User Exist ")
+    elif len(result) > 1:
+        print("Many users ")
+    else:
+        u.save()
+        print("User unique ")
+
+    guess_users = Count.objects.all().count()
     # # taking the latest profile object
     # calories = Profile.objects.filter(person_of=request.user).last()
     # calorie_goal = calories.calorie_goal
@@ -47,8 +122,11 @@ def HomePageView(request):
     #     'food_selected_today': all_food_today
     # }
 
+    context = {
+        "guess_users": guess_users
+    }
     # return render(request, 'home.html', context)
-    return render(request, 'home.html')
+    return render(request, 'home.html', context)
 # signup page changes
 
 
@@ -194,7 +272,37 @@ def ProfilePage(request):
     records = Profile.objects.filter(
         date__gte=some_day_last_week, date__lt=timezone.now().date(), person_of=request.user)
 
-    context = {'form': form, 'food_items': food_items, 'records': records}
+    labelsProfile = []
+    dataProfile = []
+
+    for entry in records:
+        dateStr = entry.date.strftime("%d %b, %Y")
+        labelsProfile.append(dateStr)
+        dataProfile.append(entry.total_calorie)
+
+    labelsCalorie = []
+    dataCalorie = []
+    dataCalorieTotal = []
+
+    for calorie in records:
+        dateStr = calorie.date.strftime("%d %b, %Y")
+        labelsCalorie.append(dateStr)
+        dataCalorie.append(calorie.calorie_goal)
+        dataCalorieTotal.append(calorie.total_calorie)
+
+    labelsFoodItem = []
+    dataFoodItems = []
+
+    for items in food_items:
+        labelsFoodItem.append(items.name)
+        dataFoodItems.append(items.calorie)
+
+    context = {'form': form, 'food_items': food_items, 'records': records,
+               "labelsProfile": labelsProfile, "dataProfile": dataProfile,
+               "labelsCalorie": labelsCalorie, "dataCalorie": dataCalorie, "dataCalorieTotal": dataCalorieTotal,
+               "labelsFoodItem": labelsFoodItem, "dataFoodItems": dataFoodItems
+               }
+
     return render(request, 'profile.html', context)
 
 
@@ -224,12 +332,36 @@ def tracker(request):
     if calorie_goal_status < 0:
         over_calorie = abs(calorie_goal_status)
 
+    labels = []
+    data = []
+
+    for entry in all_food_today:
+        labels.append(entry.food.name)
+        data.append(entry.calorie_amount)
+
+    labelCount = []
+    dataCount = []
+
+    foodCarbs = Food.objects.filter(nutrition='Carbs').count()
+    foodFats = Food.objects.filter(nutrition='Fats').count()
+    foodProtein = Food.objects.filter(nutrition='Protein').count()
+
+    filtering = all_food_today.filter()
+
+    for num in all_food_today:
+        labelCount.append(num.amount)
+        dataCount.append(num.food.name)
+
     context = {
         'total_calorie': calories.total_calorie,
         'calorie_goal': calorie_goal,
         'calorie_goal_status': calorie_goal_status,
         'over_calorie': over_calorie,
-        'food_selected_today': all_food_today
+        'food_selected_today': all_food_today,
+        'labels': labels,
+        'data': data,
+        'labelsCount': labelCount,
+        'dataCount': dataCount
     }
     return render(request, 'tracker.html', context)
 

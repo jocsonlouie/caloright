@@ -36,15 +36,43 @@
             <h1 class="text-5xl text-green">My Profile</h1>
             <h1 style="color: #508278;"> Your profile contains the information of calorie status like calorie goal of
                 the day, records from past week, and list of foods.</h1>
+            <div class="flex w-1/2">
+                <div class="mb-3 w-full">
+                    <label class="form-check-label inline-block text-white mb-4" for="level">Gender</label>
+                    <select class="form-select form-select-lg mb-3
+                        block
+                        w-full
+                        px-4
+                        py-4
+                        text-base
+                        font-normal
+                        text-white
+                        bg-transparent
+                        border border-solid border-white/10
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        outline-none focus:outline-none
+                        focus:border-green-300 focus:ring-1 focus:ring-green-500" aria-label=" .form-select-lg example"
+                        id="gender" name="level">
+                        <option value="Rather not say" selected>Rather not say</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="contain flex flex-col justify-between items-center gap-4 py-12">
+    <div class="contain flex flex-col md:flex-row justify-between items-center gap-4 py-12">
         <canvas id="calorieGoalGraph"></canvas>
+        <canvas id="nutrientSummary"></canvas>
     </div>
 
     <div class="contain flex flex-col my-20 justify-center">
         <h1 class="lg:text-4xl text-2xl mb-2 font-bold  text-center" style="color: #508278;">Past Week Records
+
         </h1>
 
         <table class="table-auto border-collapse border border-green-300 my-7">
@@ -70,6 +98,7 @@
         <canvas id="caloriesConsumedWeek" class="self-center"></canvas>
 
         <h1 class="lg:text-5xl text-3xl mb-2 font-bold  text-center" style="color: #508278;">All Foods Items
+
         </h1>
 
 
@@ -100,82 +129,210 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <canvas id="allFoodsGraph" class="self-center mt-8 mb-12"></canvas>
     </div>
 
 
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script>
-    const ctxGoal = document.getElementById('calorieGoalGraph').getContext('2d');
-    const myChartGoal = new Chart(ctxGoal, {
-        type: 'bar',
-        data: {
-            labels: ['June', 'July', 'August', 'September'],
-            datasets: [
-                {
-                    label: 'June',
-                    data: [2456, 2556, 2668, 2392],
-                    backgroundColor: [
-                        'rgba(80, 130, 120, 0.6)',
-                        'rgba(130, 255, 135, 0.6)',
-                        'rgba(200, 250, 200, 0.6)',
-                        'rgba(200, 250, 200, 0.8)',
-                    ],
-                }
-            ]
-        },
-        options: {
-
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'white',
-                    },
+    jQuery(document).ready(function () {
+        jQuery("#gender").on('change', function () {
+            let value = this.value;
+            $.ajax({
+                type: 'GET',
+                url: '/allGender',
+                data: {
+                    'gender': value
                 },
-                y: {
-                    ticks: {
-                        color: 'white',
-                    },
-                    beginAtZero: true
+                dataType: 'json',
+                success: function (data) {
+                    alert(data);
                 }
+            });
+        });
+    });
+
+    const ctxAllFoods = document.getElementById('allFoodsGraph').getContext('2d');
+    const myChartAllFoods = new Chart(ctxAllFoods, {
+        type: 'pie',
+        data: {
+            labels: {{ labelsFoodItem| safe }},
+    datasets: [
+        {
+            label: 'Food Analytics',
+            data: {{ dataFoodItems| safe }},
+        backgroundColor: [
+            'rgba(80, 130, 120, 0.6)',
+            'rgba(130, 255, 135, 0.6)',
+            'rgba(200, 250, 200, 0.6)',
+            'rgba(200, 250, 200, 0.8)',
+        ],
+        }
+    ]
+        },
+    options: {
+
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white',
+                    },
+            },
+            y: {
+                ticks: {
+                    color: 'white',
+                    },
+                beginAtZero: true
             }
         }
+    }
     });
 
     const ctxConsumed = document.getElementById('caloriesConsumedWeek').getContext('2d');
     const myChartConsumed = new Chart(ctxConsumed, {
         type: 'bar',
         data: {
-            labels: ['June 3 2022', 'June 10 2022', 'June 17 2022', 'June 24 2022'],
-            datasets: [
-                {
-                    label: 'June',
-                    data: [2194, 2965, 2459, 2391],
-                    backgroundColor: [
-                        'rgba(80, 130, 120, 0.6)',
-                        'rgba(130, 255, 135, 0.6)',
-                        'rgba(200, 250, 200, 0.6)',
-                        'rgba(200, 250, 200, 0.8)',
-                    ],
-                }
-            ]
+            labels: {{ labelsProfile| safe }},
+    datasets: [
+        {
+            label: 'Calorie Analytics',
+            data: {{ dataProfile| safe }},
+        backgroundColor: [
+            'rgba(80, 130, 120, 0.6)',
+            'rgba(130, 255, 135, 0.6)',
+            'rgba(200, 250, 200, 0.6)',
+            'rgba(200, 250, 200, 0.8)',
+        ],
+        }
+    ]
         },
-        options: {
+    options: {
 
-            scales: {
-                x: {
-                    ticks: {
-                        color: 'white',
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white',
                     },
-                },
-                y: {
-                    ticks: {
-                        color: 'white',
+            },
+            y: {
+                ticks: {
+                    color: 'white',
                     },
-                    beginAtZero: true
-                }
+                beginAtZero: true
             }
         }
+    }
     });
+    const ctxNutrient = document.getElementById('calorieGoalGraph').getContext('2d');
+    const myChartNutrient = new Chart(ctxNutrient, {
+        type: 'line',
+        data: {
+            labels: {{ labelsCalorie| safe }},
+    datasets: [
+        {
+            label: 'Calorie Goal Analytics',
+            data: {{ dataCalorie| safe }},
+        hoverOffset: 4,
+        backgroundColor: [
+            'rgba(80, 130, 120, 0.6)',
+            'rgba(130, 255, 135, 0.6)',
+            'rgba(200, 250, 200, 0.6)',
+        ],
+        fill: true,
+                }
+    ],
+
+        },
+    options: {
+        elements: {
+            arc: {
+                borderWidth: 0
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white',
+                    },
+                grid: {
+                    color: 'white'
+                },
+            },
+            y: {
+                ticks: {
+                    color: 'white',
+                    },
+                grid: {
+                    color: 'white'
+                },
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
+    const ctxNutrients = document.getElementById('nutrientSummary').getContext('2d');
+    const myChartNutrients = new Chart(ctxNutrients, {
+        type: 'line',
+        data: {
+            labels: {{ labelsCalorie| safe }},
+    datasets: [
+        {
+            label: 'Calorie Consumed',
+            data: {{ dataCalorieTotal| safe}},
+        hoverOffset: 4,
+        backgroundColor: [
+            'rgba(80, 130, 120, 0.6)',
+            'rgba(130, 255, 135, 0.6)',
+            'rgba(200, 250, 200, 0.6)',
+        ],
+        fill: true,
+        },
+        {
+            label: 'Calorie Goal',
+            data: {{ dataCalorie| safe}},
+        hoverOffset: 4,
+        backgroundColor: [
+            'rgba(80, 130, 120, 0.6)',
+            'rgba(130, 255, 135, 0.6)',
+            'rgba(200, 250, 200, 0.6)',
+        ],
+
+        fill: true,
+        },
+    ],
+
+        },
+    options: {
+        elements: {
+            arc: {
+                borderWidth: 0
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white',
+                    },
+                grid: {
+                    color: 'white'
+                },
+            },
+            y: {
+                ticks: {
+                    color: 'white',
+                    },
+                grid: {
+                    color: 'white'
+                },
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
 </script>
 {% endblock content %}

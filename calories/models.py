@@ -6,10 +6,26 @@ from datetime import date
 # Create your models here. Changes
 
 
+class Gender(models.Model):
+    gender = models.TextField(default=None)
+    user = models.TextField(default=None)
+
+    def __str__(self):
+        return self.user
+
+
+class Count(models.Model):
+    count = models.TextField(default=None)
+
+    def __str__(self):
+        return self.count
+
+
 class Food(models.Model):
     name = models.CharField(max_length=200, null=False)
     quantity = models.PositiveIntegerField(null=False, default=0)
     calorie = models.FloatField(null=False, default=0)
+    nutrition = models.CharField(max_length=200, null=False, default='Carbs')
     person_of = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
